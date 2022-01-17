@@ -2,9 +2,10 @@
 /.idea
 #忽略/src/test下的全部文件
 /src/test
+/.git
 #忽略target文件
 /target
 
 #忽略.zip文件结尾
 *.zip
-*.iml
+*.imlpu
