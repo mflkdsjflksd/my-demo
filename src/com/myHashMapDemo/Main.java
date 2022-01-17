@@ -16,7 +16,10 @@ public class Main {
             myHashMap.put(i, i);
 
         }
-        System.out.println(myHashMap.get(1600));
+        System.out.println(myHashMap.get(0));
+        System.out.println(myHashMap.get(32));
+        System.out.println(myHashMap.get(0));
+        System.out.println(myHashMap.get(16));
 //        System.out.println(myHashMap.get(1));
 //        System.out.println(myHashMap.get(150000));
         HashMap<Object, Object> map = new HashMap<>();

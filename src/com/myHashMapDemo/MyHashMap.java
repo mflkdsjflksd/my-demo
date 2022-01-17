@@ -85,31 +85,29 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      */
     private Entry<K, V>[] resize() {
         Entry<K, V>[] kvEntry = null;
-        if (size == 0) {
+        if (this.table == null) {
             Entry<K, V>[] entries = new Entry[mapLength];
             return entries;
         } else if (size >= (this.threshold)) {
             this.mapLength = this.mapLength * 2;
-            this.threshold = (int) Math.ceil(this.mapLength * CRITICAL_VALUE);
+            this.threshold *= 2;
             kvEntry = new Entry[this.mapLength];
             int hashCode;
-            if (this.table != null) {
-                for (Entry entry : table) {
-                    if (entry == null) {
-                        continue;
+            for (Entry entry : table) {
+                if (entry == null) {
+                    continue;
+                }
+                //如果当前元素是链表，计算每一个元素的哈希值
+                if (entry.next != null) {
+                    while (entry != null) {
+                        kvEntry[hashCode(entry)] = entry;
+                        entry = entry.next;
                     }
-                    //如果当前元素是链表，计算每一个元素的哈希值
-                    if (entry.next != null) {
-                        while (entry != null) {
-                            kvEntry[hashCode(entry)] = entry;
-                            entry = entry.next;
-                        }
-                    }
-                    //直接添加
-                    else {
-                        hashCode = hashCode(entry.getKey());
-                        kvEntry[hashCode] = entry;
-                    }
+                }
+                //直接添加
+                else {
+                    hashCode = hashCode(entry.getKey());
+                    kvEntry[hashCode] = entry;
                 }
             }
         }
@@ -138,16 +136,14 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @return
      */
     private V findValueByKey(K k, Entry<K, V> kvEntry) {
-        Entry<K, V> temp = kvEntry;
-
         if (kvEntry != null && (k == kvEntry.getKey() || kvEntry.getKey().equals(k))) {
             return kvEntry.getValue();
         } else {
-            while (temp != null) {
-                if (k == temp.getKey() || temp.getKey().equals(k)) {
-                    return temp.getValue();
+            while (kvEntry != null) {
+                if (k == kvEntry.getKey() || kvEntry.getKey().equals(k)) {
+                    return kvEntry.getValue();
                 }
-                temp = temp.next;
+                kvEntry = kvEntry.next;
             }
         }
         return null;
@@ -164,8 +160,9 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         int hashCode = hashCode(k);
         if (table[hashCode] == null) {
             return false;
-        } else if (table[hashCode].next == null) {
-            table[hashCode] = null;
+        } else if (table[hashCode].getKey() == k || table[hashCode].getKey().equals(k)) {
+            table[hashCode] = table[hashCode].next;
+            size--;
             return true;
         } else {
             Entry temp = table[hashCode];
@@ -202,6 +199,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return 0;
         }
         int h = key.hashCode();
-        return (h ^ (h >>> 16)) % 16;
+        return (h ^ (h >>> 16)) % this.mapLength;
     }
 }
