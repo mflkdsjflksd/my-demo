@@ -140,7 +140,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     private V findValueByKey(K k, Entry<K, V> kvEntry) {
         Entry temp = kvEntry;
 
-        if (kvEntry != null && (k == kvEntry.getKey() || kvEntry.equals(k))) {
+        if (kvEntry != null && (k == kvEntry.getKey() || kvEntry.getKey().equals(k))) {
             return kvEntry.getValue();
         } else {
             while (temp != null) {
