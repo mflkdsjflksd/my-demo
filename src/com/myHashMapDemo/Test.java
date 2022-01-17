@@ -17,7 +17,6 @@ public class Test {
         }
 
         System.out.println(myHashMap.get(1));
-        System.out.println(myHashMap.remove(1));
         System.out.println(myHashMap.put(1, 2));
         System.out.println(myHashMap.get(1));
         HashMap<Object, Object> map = new HashMap<>();

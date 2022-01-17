@@ -2,7 +2,8 @@
 /.idea
 #忽略/src/test下的全部文件
 /src/test
-/.git
+/.gitignore
+/.ggit it
 #忽略target文件
 /target
 
