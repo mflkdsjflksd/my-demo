@@ -66,7 +66,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             size++;
         } else {
             V oldValue;
-            while (kvEntry != null) {
+            while (kvEntry.next != null) {
                 if (kvEntry.getKey().equals(k)) {
                     oldValue = kvEntry.getValue();
                     kvEntry.value = v;
@@ -138,14 +138,14 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @return
      */
     private V findValueByKey(K k, Entry<K, V> kvEntry) {
-        Entry temp = kvEntry;
+        Entry<K, V> temp = kvEntry;
 
         if (kvEntry != null && (k == kvEntry.getKey() || kvEntry.getKey().equals(k))) {
             return kvEntry.getValue();
         } else {
             while (temp != null) {
-                if (k == kvEntry.getKey() || kvEntry.equals(k)) {
-                    return kvEntry.getValue();
+                if (k == temp.getKey() || temp.getKey().equals(k)) {
+                    return temp.getValue();
                 }
                 temp = temp.next;
             }
@@ -202,6 +202,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return 0;
         }
         int h = key.hashCode();
-        return (h ^ (h >>> 16)) % mapLength;
+        return (h ^ (h >>> 16)) % 16;
     }
 }
