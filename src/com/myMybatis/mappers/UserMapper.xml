@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="com.myMybatis.dao.UserMapper">
+    <select id="selectOneUser" resultType="com.myMybatis.entity.User">
+        select * from user where username = ?
+    </select>
+    <select id="selectAllByAge" resultType="com.myMybatis.entity.User">
+        select * from user where age = ?
+    </select>
+    <update id="updateOneUser" resultType="com.myMybatis.entity.User">
+        update user set username = ? where username = ?
+    </update>
+</mapper>
+

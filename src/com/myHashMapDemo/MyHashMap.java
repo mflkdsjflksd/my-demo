@@ -199,6 +199,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return 0;
         }
         int h = key.hashCode();
-        return (h ^ (h >>> 16)) % this.mapLength;
+        return Math.abs((h ^ (h >>> 16)) % this.mapLength);
     }
 }
