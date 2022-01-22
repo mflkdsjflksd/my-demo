@@ -65,12 +65,17 @@ public class ResultUtil {
     }
 
     public static void parameterize(PreparedStatement preparedStatement, Object parameter) throws SQLException {
-        if (parameter instanceof Integer) {
-            preparedStatement.setInt(1, (int) parameter);
-        } else if (parameter instanceof Long) {
-            preparedStatement.setLong(1, (long) parameter);
-        } else if (parameter instanceof String) {
-            preparedStatement.setString(1, (String) parameter);
+        Object[] ob = (Object[]) parameter;
+        for (int i = 0; i < ob.length; i++) {
+            if (ob[i] instanceof Integer) {
+                preparedStatement.setInt(i + 1, (int) ob[i]);
+            } else if (ob[i] instanceof Long) {
+                preparedStatement.setLong(i + 1, (long) ob[i]);
+            } else if (ob[i] instanceof String) {
+                preparedStatement.setString(i + 1, (String) ob[i]);
+            }
         }
+
+
     }
 }

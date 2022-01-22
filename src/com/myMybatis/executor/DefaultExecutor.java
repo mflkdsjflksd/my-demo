@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @Author: xs
- * @describe: 默认执行方法
+ * @describe: 默认执行器
  * @date 2022/1/20 15:19
  */
 public class DefaultExecutor implements Executor {
@@ -47,5 +47,24 @@ public class DefaultExecutor implements Executor {
         return ret;
     }
 
-
+    @Override
+    public int update(MappedStatement ms, Object parameter) {
+        int res = 0;
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            //获取连接
+            connection = DruidUtil.getConnection();
+            preparedStatement = connection.prepareStatement(ms.getSql());
+            ResultUtil.parameterize(preparedStatement, parameter);
+            //请求数据库,并返回结果
+            res = preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            DruidUtil.close(resultSet, preparedStatement, connection);
+        }
+        return res;
+    }
 }

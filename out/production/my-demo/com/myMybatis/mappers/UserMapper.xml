@@ -4,11 +4,20 @@
     <select id="selectOneUser" resultType="com.myMybatis.entity.User">
         select * from user where username = ?
     </select>
+    <select id="selectOneUserByUsernameAndAge" resultType="com.myMybatis.entity.User">
+        select * from user where username = ? and age = ?
+    </select>
     <select id="selectAllByAge" resultType="com.myMybatis.entity.User">
         select * from user where age = ?
     </select>
-    <update id="updateOneUser" resultType="com.myMybatis.entity.User">
-        update user set username = ? where username = ?
+    <update id="updateUserById" resultType="java.lang.Integer">
+        update user set username = ? , age= ? where id = ?
     </update>
+    <insert id="insertUser" resultType="java.lang.Integer">
+        insert into user values(null,?,?)
+    </insert>
+    <delete id="deleteUserById" resultType="java.lang.Integer">
+        delete from user where id = ?
+    </delete>
 </mapper>
 

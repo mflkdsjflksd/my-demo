@@ -14,7 +14,7 @@ import java.util.List;
  * @author: xs
  * @describe:
  */
-public class SqlSessionSingleton {
+public class SqlSessionFactory {
     /**
      * @describe: 初始化实例对象
      */
@@ -29,7 +29,7 @@ public class SqlSessionSingleton {
         loadMappersInfo();
     }
 
-    private SqlSessionSingleton() {
+    private SqlSessionFactory() {
     }
 
     public static SqlSession getSqlSession() {

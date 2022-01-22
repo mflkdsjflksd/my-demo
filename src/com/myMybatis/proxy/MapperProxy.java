@@ -1,6 +1,8 @@
 package com.myMybatis.proxy;
 
 import com.myMybatis.session.SqlSession;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -18,13 +20,21 @@ public class MapperProxy implements InvocationHandler {
         this.session = session;
     }
 
+
+    /**
+     * @Author: xs
+     * @Date: 2022/1/21 22:08
+     * @describe: jdk代理
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Class<?> returnType = method.getReturnType();
         if (Collection.class.isAssignableFrom(returnType)) {
-            return session.selectList(method.getDeclaringClass().getName() + "." + method.getName(), args == null ? null : args[0]);
+            return session.selectList(method.getDeclaringClass().getName() + "." + method.getName(), args);
+        } else if (int.class.isAssignableFrom(returnType)) {
+            return session.updateOne(method.getDeclaringClass().getName() + "." + method.getName(), args);
         } else {
-            return session.selectOne(method.getDeclaringClass().getName() + "." + method.getName(), args == null ? null : args[0]);
+            return session.selectOne(method.getDeclaringClass().getName() + "." + method.getName(), args);
         }
     }
 }

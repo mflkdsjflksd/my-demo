@@ -39,6 +39,11 @@ public class DefaultSqlSession implements SqlSession {
         return executor.query(conf.getMappedStatements().get(statement), parameter);
     }
 
+    @Override
+    public int updateOne(String statement, Object args) {
+        return executor.update(conf.getMappedStatements().get(statement), args);
+    }
+
     /**
      * @Author: xs
      * @Date: 2022/1/20 16:19
@@ -46,7 +51,6 @@ public class DefaultSqlSession implements SqlSession {
      */
     @Override
     public <T> T getMapper(Class<T> type) {
-        ;
         MapperProxy mapperProxy = new MapperProxy(this);
         return (T) Proxy.newProxyInstance(type.getClassLoader(), new Class[]{type}, mapperProxy);
     }

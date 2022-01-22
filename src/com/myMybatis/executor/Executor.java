@@ -15,4 +15,6 @@ public interface Executor {
      * @describe:
      */
     <E> List<E> query(MappedStatement ms, Object parameter);
+
+    int update(MappedStatement ms, Object parameter);
 }
