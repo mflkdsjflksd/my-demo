@@ -9,9 +9,9 @@ import com.google.common.hash.Funnels;
  * @describe:
  * @date 2022/2/13 17:57
  */
-public class Test {
+public class BloomFilterTest {
 
-    /**
+    /**gl
      * @describe: 预期大小
      */
     private static int SIZE = 1000000;
@@ -21,7 +21,7 @@ public class Test {
      */
     private static double FPP = 0.03;
 
-    private static BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), SIZE, FPP);
+    private static com.google.common.hash.BloomFilter<Integer> bloomFilter = com.google.common.hash.BloomFilter.create(Funnels.integerFunnel(), SIZE, FPP);
 
     /**
      * @describe: 测试数据
