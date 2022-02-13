@@ -30,7 +30,6 @@ public class Main {
         System.out.println(i);
         int a = userMapper.insertUser("大帅比", 1);*/
         userMapper.updateUserById("xushan", 1, 1);
-        System.out.println();
     }
 }
 
