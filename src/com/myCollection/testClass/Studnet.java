@@ -13,7 +13,10 @@ public class Studnet {
 
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Studnet studnet = (Studnet) o;
+        return age == studnet.age && studnet.name.equals(name);
     }
 
     @Override

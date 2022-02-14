@@ -16,6 +16,7 @@ public class Main {
         System.out.println(set.contains(1));
         set.clear();
         System.out.println(set.contains(1));
+
         System.out.println();
     }
 }

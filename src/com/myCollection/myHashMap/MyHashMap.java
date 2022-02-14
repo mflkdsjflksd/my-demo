@@ -1,5 +1,7 @@
 package com.myCollection.myHashMap;
 
+import java.util.Objects;
+
 public class MyHashMap<K, V> implements MyMap<K, V> {
     private Entry<K, V>[] table = null;
 
@@ -24,10 +26,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         public Entry(K key, V value, Entry<K, V> next) {
             this.key = key;
             this.value = value;
-            this.next = next;
-        }
-
-        public Entry(Entry<K, V> next) {
             this.next = next;
         }
 
@@ -56,37 +54,37 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * <p>
      * false 如果找到相同值，替换，否者插入到链表最后
      *
-     * @param k
-     * @param v
+     * @param key
+     * @param value
      * @return
      */
     @Override
-    public V put(K k, V v) {
+    public V put(K key, V value) {
         Entry<K, V>[] tab;
         if ((tab = validaResize()) != null) {
             this.table = tab;
         }
 
-        int index = getHashCode(k);
-        Entry<K, V> kvEntry = table[index];
+        int index = getHashCode(key);
+        Entry<K, V> entry = table[index];
 
-        if (kvEntry == null) {
-            table[index] = new Entry<>(k, v, null);
-            size++;
+        if (entry == null) {
+            table[index] = new Entry<>(key, value, null);
         } else {
             V oldValue;
-            while (kvEntry.next != null) {
-                if (kvEntry.getKey().equals(k)) {
-                    oldValue = kvEntry.getValue();
-                    kvEntry.value = v;
+            while (entry.next != null) {
+                if (entry.getKey().equals(key) && entry.getKey() == key) {
+                    oldValue = entry.getValue();
+                    entry.value = value;
                     return oldValue;
                 } else {
-                    kvEntry = kvEntry.next;
+                    entry = entry.next;
                 }
             }
-            kvEntry.next = new Entry<>(k, v, null);
+            entry.next = new Entry<>(key, value, null);
         }
-        return table[index].getValue();
+        size++;
+        return value;
     }
 
     /**
@@ -175,25 +173,25 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     /**
      * 删除一个key value
      *
-     * @param k
-     * @return
+     * @param key
+     * @key
      */
     @Override
-    public boolean remove(K k) {
-        int idnex = getHashCode(k);
+    public boolean remove(K key) {
+        int idnex = getHashCode(key);
         if (table[idnex] == null) {
             return false;
-        } else if (table[idnex].getKey() == k || table[idnex].getKey().equals(k)) {
+        } else if (table[idnex].getKey() == key && table[idnex].getKey().equals(key)) {
             table[idnex] = table[idnex].next;
-            if (table[idnex] == null) {
-                size--;
-            }
+            size--;
             return true;
         } else {
             Entry temp = table[idnex];
             while (temp.next != null) {
-                if (temp.next.getKey() == k || temp.next.getKey().equals(k)) {
+
+                if (temp.next.getKey().equals(key) && temp.next.getKey().hashCode() == key.hashCode()) {
                     temp.next = temp.next.next;
+                    size--;
                     return true;
                 } else {
                     temp = temp.next;
