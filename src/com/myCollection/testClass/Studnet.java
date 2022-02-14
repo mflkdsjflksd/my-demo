@@ -1,4 +1,4 @@
-package com.myHashMapDemo;
+package com.myCollection.testClass;
 
 import java.util.Objects;
 
@@ -13,15 +13,11 @@ public class Studnet {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Studnet studnet = (Studnet) o;
-
-        return age == studnet.age && Objects.equals(name, studnet.name);
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age);
+        return 100;
     }
 }

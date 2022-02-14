@@ -1,7 +1,6 @@
 package com.bloomFilter;
 
 
-import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 
 /**
@@ -19,7 +18,7 @@ public class BloomFilterTest {
     /**
      * @describe: 预期误判率
      */
-    private static double FPP = 0.03;
+    private static double FPP = 0.01;
 
     private static com.google.common.hash.BloomFilter<Integer> bloomFilter = com.google.common.hash.BloomFilter.create(Funnels.integerFunnel(), SIZE, FPP);
 

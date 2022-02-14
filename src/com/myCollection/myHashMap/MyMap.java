@@ -1,6 +1,8 @@
-package com.myHashMapDemo;
+package com.myCollection.myHashMap;
 
-public interface MyMap<K, V> {
+import com.myCollection.MyCollection;
+
+public interface MyMap<K, V> extends MyCollection {
     /**
      * 定义put方法
      *
@@ -27,6 +29,7 @@ public interface MyMap<K, V> {
 
     /**
      * 删除一个元素
+     *
      * @param k
      * @return
      */
