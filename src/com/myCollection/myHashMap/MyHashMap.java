@@ -1,11 +1,10 @@
 package com.myCollection.myHashMap;
 
-import java.util.Objects;
 
 public class MyHashMap<K, V> implements MyMap<K, V> {
-    private Entry<K, V>[] table = null;
+    private Entry<K, V>[] mapTable = null;
 
-    private int length = 16;
+    private int mapLength = 16;
     /**
      * @describe: 负载因子
      */
@@ -14,14 +13,20 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @describe: 临界值;
      */
     private int threshold = getThreshold();
-
+    /**
+     * @describe: 结点个数
+     */
     private int size = 0;
 
+    /**
+     * @Author: xs
+     * @Date: 2022/2/15 11:46
+     * @describe: 存储数据
+     */
     class Entry<K, V> implements MyMap.Entry<K, V> {
-        K key;
-        V value;
-        int index;
-        Entry<K, V> next;
+        private K key;
+        private V value;
+        private Entry<K, V> next;
 
         public Entry(K key, V value, Entry<K, V> next) {
             this.key = key;
@@ -43,8 +48,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     public MyHashMap() {
     }
 
-    public MyHashMap(int length) {
-        this.length = length;
+    public MyHashMap(int mapLength) {
+        this.mapLength = mapLength;
         threshold = getThreshold();
     }
 
@@ -62,14 +67,14 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     public V put(K key, V value) {
         Entry<K, V>[] tab;
         if ((tab = validaResize()) != null) {
-            this.table = tab;
+            mapTable = tab;
         }
 
-        int index = getHashCode(key);
-        Entry<K, V> entry = table[index];
+        int index = getIndex(key);
+        Entry<K, V> entry = mapTable[index];
 
         if (entry == null) {
-            table[index] = new Entry<>(key, value, null);
+            mapTable[index] = new Entry<>(key, value, null);
         } else {
             V oldValue;
             while (entry.next != null) {
@@ -95,15 +100,15 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     private Entry<K, V>[] validaResize() {
         Entry<K, V>[] kvEntry = null;
         //如果当前数组未初始化，初始化数组
-        if (this.table == null) {
-            Entry<K, V>[] newTable = new Entry[length];
-            return newTable;
+        if (this.mapTable == null) {
+            Entry<K, V>[] newmapTable = new Entry[mapLength];
+            return newmapTable;
         }
         //当前需要扩容
         else if (size >= (this.threshold)) {
-            length <<= 1;
+            mapLength <<= 1;
             threshold <<= 1;
-            return resize(new Entry[length]);
+            return resize(new Entry[mapLength]);
         }
         return null;
     }
@@ -113,26 +118,26 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @Date: 2022/2/14 21:57
      * @describe: 扩容
      */
-    private Entry<K, V>[] resize(Entry<K, V>[] newTable) {
+    private Entry<K, V>[] resize(Entry<K, V>[] newmapTable) {
         int index;
-        for (Entry entry : table) {
+        for (Entry entry : mapTable) {
             Entry<K, V> temp;
             while (entry != null) {
-                index = getHashCode(entry.getKey());
-                if (newTable[index] != null) {
+                index = getIndex(entry.getKey());
+                if (newmapTable[index] != null) {
                     temp = entry;
                     entry = entry.next;
-                    temp.next = newTable[index];
-                    newTable[index] = temp;
+                    temp.next = newmapTable[index];
+                    newmapTable[index] = temp;
                 } else {
-                    newTable[index] = entry;
+                    newmapTable[index] = entry;
                     entry = entry.next;
-                    newTable[index].next = null;
+                    newmapTable[index].next = null;
                 }
             }
 
         }
-        return newTable;
+        return newmapTable;
     }
 
     /**
@@ -143,8 +148,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      */
     @Override
     public V get(K k) {
-        int index = getHashCode(k);
-        Entry<K, V> kvEntry = table[index];
+        int index = getIndex(k);
+        Entry<K, V> kvEntry = mapTable[index];
         return findValueByKey(k, kvEntry);
     }
 
@@ -178,17 +183,16 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      */
     @Override
     public boolean remove(K key) {
-        int idnex = getHashCode(key);
-        if (table[idnex] == null) {
+        int idnex = getIndex(key);
+        if (mapTable[idnex] == null) {
             return false;
-        } else if (table[idnex].getKey() == key && table[idnex].getKey().equals(key)) {
-            table[idnex] = table[idnex].next;
+        } else if (mapTable[idnex].getKey() == key && mapTable[idnex].getKey().equals(key)) {
+            mapTable[idnex] = mapTable[idnex].next;
             size--;
             return true;
         } else {
-            Entry temp = table[idnex];
+            Entry temp = mapTable[idnex];
             while (temp.next != null) {
-
                 if (temp.next.getKey().equals(key) && temp.next.getKey().hashCode() == key.hashCode()) {
                     temp.next = temp.next.next;
                     size--;
@@ -211,13 +215,31 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         return this.size;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public boolean containsKey(K key) {
+        if (mapTable[getIndex(key)] != null) {
+            Entry tempEntry = mapTable[getIndex(key)];
+            while (tempEntry != null) {
+                if (tempEntry.getKey().equals(key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * @Author: xs
      * @Date: 2022/2/14 15:20
      * @describe: 临界值计算
      */
     private int getThreshold() {
-        return (int) Math.ceil(length * CRITICAL_VALUE);
+        return (int) Math.ceil(mapLength * CRITICAL_VALUE);
     }
 
     /**
@@ -226,11 +248,11 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @param key
      * @return
      */
-    private int getHashCode(Object key) {
+    private int getIndex(Object key) {
         if (key == null) {
             return 0;
         }
         int h = key.hashCode();
-        return Math.abs((h ^ (h >>> 16)) % this.length);
+        return Math.abs((h ^ (h >>> 16)) % this.mapLength);
     }
 }

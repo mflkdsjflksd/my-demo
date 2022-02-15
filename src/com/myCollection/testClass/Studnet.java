@@ -16,7 +16,7 @@ public class Studnet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Studnet studnet = (Studnet) o;
-        return age == studnet.age && studnet.name.equals(name);
+        return age == studnet.age && name.equals(studnet.name);
     }
 
     @Override

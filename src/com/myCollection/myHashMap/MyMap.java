@@ -36,6 +36,20 @@ public interface MyMap<K, V> extends MyCollection {
     boolean remove(K k);
 
     /**
+     * @Author: xs
+     * @Date: 2022/2/15 13:50
+     * @describe: 当前Map是否为空
+     */
+    boolean isEmpty();
+
+    /**
+     * @Author: xs
+     * @Date: 2022/2/15 13:51
+     * @describe: 是否包含key
+     */
+    boolean containsKey(K key);
+
+    /**
      * 定义规范
      *
      * @param <K>

@@ -10,9 +10,9 @@ class MyHashSet<T> implements MySet<T> {
     Entry<T>[] table;
 
     /**
-     * @describe: 初始长度
+     * @describe: set长度
      */
-    int TABLE_LENGTH = 16;
+    int setLength = 16;
 
     /**
      * @describe: 负载因子
@@ -33,7 +33,7 @@ class MyHashSet<T> implements MySet<T> {
     /**
      * @describe: 存放数据类
      */
-    class Entry<T> {
+    class Entry<T> implements MySet.Entry {
         T key;
         Entry next;
 
@@ -41,20 +41,18 @@ class MyHashSet<T> implements MySet<T> {
             this.key = key;
         }
 
+        @Override
         public T getKey() {
             return key;
         }
 
-        public void setKey(T key) {
-            this.key = key;
-        }
     }
 
     public MyHashSet() {
     }
 
     public MyHashSet(int length) {
-        this.TABLE_LENGTH = length;
+        this.setLength = length;
         //重新计算临界值
         threshold = getThreshold();
     }
@@ -67,7 +65,8 @@ class MyHashSet<T> implements MySet<T> {
             this.table = tab;
         }
         /**
-         * @describe: 插入方法，通过计算索引，如果当前索引位置为null直接插入，否者插入链表,并在插入链表时判断是否已经存在
+         * 插入方法，通过计算索引，如果当前索引位置为null直接插入，
+         * 否者插入链表,并在插入链表时判断是否已经存在
          */
         int index = getHashCode(key);
         Entry<T> newEntry = new Entry<>(key);
@@ -87,9 +86,6 @@ class MyHashSet<T> implements MySet<T> {
                 temp.next = newEntry;
             }
         }
-        /**
-         * @describe: 当前是否需要扩容
-         */
         size++;
         return true;
     }
@@ -116,6 +112,9 @@ class MyHashSet<T> implements MySet<T> {
             return true;
         } else {
             while (temp.next != null) {
+                T k = (T) temp.next.getKey();
+                System.out.println(k == key);
+                System.out.println(k.equals(key));
                 if (temp.next.getKey() == key || temp.next.getKey().equals(key)) {
                     temp.next = temp.next.next;
                     size--;
@@ -158,7 +157,7 @@ class MyHashSet<T> implements MySet<T> {
     @Override
     public void clear() {
         table = new Entry[16];
-        TABLE_LENGTH = 16;
+        setLength = 16;
         size = 0;
         threshold = getThreshold();
     }
@@ -171,15 +170,13 @@ class MyHashSet<T> implements MySet<T> {
     private Entry<T>[] validaResize() {
         Entry<T>[] newTable = null;
         if (table == null) {
-            newTable = new Entry[TABLE_LENGTH];
+            newTable = new Entry[setLength];
         }
-        /**
-         * @describe: 需要扩容
-         */
+        //需要扩容
         else if (size >= threshold) {
-            TABLE_LENGTH <<= 1;
+            setLength <<= 1;
             threshold <<= 1;
-            newTable = resize(new Entry[TABLE_LENGTH]);
+            newTable = resize(new Entry[setLength]);
         }
         return newTable;
     }
@@ -198,7 +195,7 @@ class MyHashSet<T> implements MySet<T> {
                 //重新计算该节点的hash值；
                 index = getHashCode(entry.getKey());
                 //如果要添加的位置已经有节点了，添加新的结点采用头插法,避免循环链表时间复杂度变高；
-                if (table[index] != null) {
+                if (newTable[index] != null) {
                     temp = entry;
                     entry = entry.next;
                     newTable[index] = temp;
@@ -215,9 +212,13 @@ class MyHashSet<T> implements MySet<T> {
         return newTable;
     }
 
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
     private int getThreshold() {
-        return (int) Math.ceil(TABLE_LENGTH * CRITICAL_VALUE);
+        return (int) Math.ceil(setLength * CRITICAL_VALUE);
     }
 
     private int getHashCode(Object key) {
@@ -225,7 +226,7 @@ class MyHashSet<T> implements MySet<T> {
             return 0;
         }
         int h = key.hashCode();
-        return Math.abs((h ^ (h >>> 16)) % this.TABLE_LENGTH);
+        return Math.abs((h ^ (h >>> 16)) % this.setLength);
     }
 
 }

@@ -39,4 +39,18 @@ public interface MySet<T> extends MyCollection {
      * @describe: 清理当前set
      */
     void clear();
+    /**
+     * @Author: xs
+     * @Date: 2022/2/15 14:25
+     * @describe: 判断当前map是否为null
+     */
+    boolean isEmpty();
+    /**
+     * @Author: xs
+     * @Date: 2022/2/15 14:25
+     * @describe: 存放数据类
+     */
+    interface Entry<K, V> {
+        K getKey();
+    }
 }
