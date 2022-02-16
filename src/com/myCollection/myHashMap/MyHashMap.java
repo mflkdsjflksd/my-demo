@@ -135,7 +135,6 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
                     newmapTable[index].next = null;
                 }
             }
-
         }
         return newmapTable;
     }

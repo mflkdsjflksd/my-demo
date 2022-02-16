@@ -7,7 +7,7 @@ public class MyHashMapTest {
     public static void main(String[] args) {
         //自定义测试
         MyMap<Studnet, Integer> stuMap = new MyHashMap<>();
-        int length = 3;
+        int length = 100;
         for (int i = 0; i < length; i++) {
             Integer put = stuMap.put(new Studnet(String.valueOf(i), i), i);
             System.out.println(put);
