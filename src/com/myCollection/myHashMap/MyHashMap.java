@@ -2,13 +2,12 @@ package com.myCollection.myHashMap;
 
 
 public class MyHashMap<K, V> implements MyMap<K, V> {
-    private Entry<K, V>[] mapTable = null;
-
-    private int mapLength = 16;
     /**
      * @describe: 负载因子
      */
-    private static final double CRITICAL_VALUE = 0.75;
+    private float CRITICAL_VALUE = 0.75f;
+    private Entry<K, V>[] mapTable = null;
+    private int mapLength = 16;
     /**
      * @describe: 临界值;
      */
@@ -17,40 +16,24 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      * @describe: 结点个数
      */
     private int size = 0;
-
     /**
-     * @Author: xs
-     * @Date: 2022/2/15 11:46
-     * @describe: 存储数据
+     * @describe: map最大长度
      */
-    class Entry<K, V> implements MyMap.Entry<K, V> {
-        private K key;
-        private V value;
-        private Entry<K, V> next;
-
-        public Entry(K key, V value, Entry<K, V> next) {
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
-
-        @Override
-        public K getKey() {
-            return key;
-        }
-
-        @Override
-        public V getValue() {
-            return value;
-        }
-    }
+    private int MAX_TABLE_LENGTH = Integer.MAX_VALUE;
 
     public MyHashMap() {
     }
 
-    public MyHashMap(int mapLength) {
+    public MyHashMap(int mapLength, float loadFactor) throws Exception {
+        if (mapLength < 0) {
+            throw new Exception("数组长度应该为负数");
+        }
+        if (loadFactor <= 0 || loadFactor >= 1) {
+            throw new Exception("负载因子应该大于0且小于1");
+        }
         this.mapLength = mapLength;
         threshold = getThreshold();
+        this.CRITICAL_VALUE = loadFactor;
     }
 
     /**
@@ -61,7 +44,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      *
      * @param key
      * @param value
-     * @return
+     * @return 最新的value
      */
     @Override
     public V put(K key, V value) {
@@ -183,6 +166,9 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     @Override
     public boolean remove(K key) {
         int idnex = getIndex(key);
+        if (mapTable == null || size == 0 || mapTable[idnex] == null) {
+            return false;
+        }
         if (mapTable[idnex] == null) {
             return false;
         } else if (mapTable[idnex].getKey() == key && mapTable[idnex].getKey().equals(key)) {
@@ -253,5 +239,32 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         }
         int h = key.hashCode();
         return Math.abs((h ^ (h >>> 16)) % this.mapLength);
+    }
+
+    /**
+     * @Author: xs
+     * @Date: 2022/2/15 11:46
+     * @describe: 存储数据
+     */
+    class Entry<K, V> implements MyMap.Entry<K, V> {
+        private K key;
+        private V value;
+        private Entry<K, V> next;
+
+        public Entry(K key, V value, Entry<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
     }
 }
