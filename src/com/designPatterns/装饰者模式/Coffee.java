@@ -1,4 +1,4 @@
-package com.designPatterns.decorated;
+package com.designPatterns.装饰者模式;
 
 /**
  * @Author: xs

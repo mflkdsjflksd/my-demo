@@ -2,8 +2,6 @@ package com.myCollection.myHashMap;
 
 import com.myCollection.testClass.Studnet;
 
-import java.util.HashMap;
-
 
 public class MyHashMapTest {
     public static void main(String[] args) {
