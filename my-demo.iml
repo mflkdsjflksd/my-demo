@@ -8,5 +8,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="libs" level="project" />
+    <orderEntry type="library" name="cglib-3.3.0" level="project" />
+    <orderEntry type="library" name="asm-3.1.wso2v1" level="project" />
+    <orderEntry type="library" name="asm-9.2" level="project" />
   </component>
 </module>
