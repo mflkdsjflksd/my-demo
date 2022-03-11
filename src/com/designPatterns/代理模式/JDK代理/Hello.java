@@ -7,6 +7,5 @@ package com.designPatterns.代理模式.JDK代理;
  */
 public interface Hello {
     void morning(String name);
-
     String handle(String str);
 }
