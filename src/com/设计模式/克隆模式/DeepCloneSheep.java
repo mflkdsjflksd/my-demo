@@ -19,7 +19,11 @@ public class DeepCloneSheep implements Cloneable, Serializable {
         this.name = name;
         this.age = age;
     }
-
+    /**
+     * @Author: xs
+     * @Date: 2022/3/11 22:30
+     * @describe: clone模式
+     */
     @Override
     public DeepCloneSheep clone() throws CloneNotSupportedException {
         DeepCloneSheep clone = (DeepCloneSheep) super.clone();
@@ -28,7 +32,11 @@ public class DeepCloneSheep implements Cloneable, Serializable {
         }
         return clone;
     }
-
+    /**
+     * @Author: xs
+     * @Date: 2022/3/11 22:30
+     * @describe: 序列化方式
+     */
     public DeepCloneSheep SerializableClone() {
         //字节输出流
         ByteArrayOutputStream bos = null;
