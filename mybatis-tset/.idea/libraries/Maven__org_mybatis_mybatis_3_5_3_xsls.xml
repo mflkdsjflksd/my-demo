@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.mybatis:mybatis:3.5.3-xsls">
+    <CLASSES>
+      <root url="jar://E:/maven/org/mybatis/mybatis/3.5.3-xsls/mybatis-3.5.3-xsls.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://E:/maven/org/mybatis/mybatis/3.5.3-xsls/mybatis-3.5.3-xsls-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://E:/maven/org/mybatis/mybatis/3.5.3-xsls/mybatis-3.5.3-xsls-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
