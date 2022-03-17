@@ -1,4 +1,4 @@
-package com.rabbitMQ;
+package com.rabbitMQ.simple;
 
 import com.rabbitmq.client.*;
 import org.junit.Test;
