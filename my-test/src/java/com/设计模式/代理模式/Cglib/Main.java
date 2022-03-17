@@ -1,7 +1,5 @@
 package java.com.设计模式.代理模式.Cglib;
 
-import com.设计模式.代理模式.Cglib.HelloWorldCglib;
-import com.设计模式.代理模式.Cglib.ProxyFactory;
 
 /**
  * @Author: xs

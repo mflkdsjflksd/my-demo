@@ -1,7 +1,6 @@
 package java.com.设计模式.克隆模式;
 
-import com.设计模式.克隆模式.DeepCloneSheep;
-import com.设计模式.克隆模式.Sheep;
+
 
 /**
  * @Author: xs

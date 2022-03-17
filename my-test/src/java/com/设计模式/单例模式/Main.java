@@ -1,8 +1,5 @@
 package java.com.设计模式.单例模式;
 
-import com.设计模式.单例模式.DoubleCheck;
-import com.设计模式.单例模式.EnumClass;
-import com.设计模式.单例模式.StaticInternalClass;
 
 /**
  * @Author: xs

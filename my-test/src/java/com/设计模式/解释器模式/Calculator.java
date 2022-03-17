@@ -1,9 +1,6 @@
 package java.com.设计模式.解释器模式;
 
-import com.设计模式.解释器模式.AddExpression;
-import com.设计模式.解释器模式.Expression;
-import com.设计模式.解释器模式.SubExpression;
-import com.设计模式.解释器模式.VarExpression;
+
 
 import java.util.HashMap;
 import java.util.Stack;

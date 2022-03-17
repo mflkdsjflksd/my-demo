@@ -1,8 +1,6 @@
 package java.com.设计模式.代理模式.JDK代理;
 
-import com.设计模式.代理模式.JDK代理.Hello;
-import com.设计模式.代理模式.JDK代理.HelloWorld;
-import com.设计模式.代理模式.JDK代理.ProxyFactory;
+
 
 /**
  * @Author: xs

@@ -6,6 +6,7 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -18,6 +19,7 @@ public class RabbitMqUtils {
     public static final String QUEUE_NAME = "hello xushan";
 
     public static Channel getChannel() {
+
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("81.68.219.116");
         factory.setUsername("admin");

@@ -1,6 +1,6 @@
 package java.com.设计模式.组合模式;
 
-import com.设计模式.组合模式.OrganizationComponent;
+
 
 import java.util.ArrayList;
 import java.util.List;

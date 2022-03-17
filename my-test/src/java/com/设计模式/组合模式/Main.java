@@ -1,8 +1,6 @@
 package java.com.设计模式.组合模式;
 
-import com.设计模式.组合模式.College;
-import com.设计模式.组合模式.Department;
-import com.设计模式.组合模式.University;
+
 
 import java.util.Arrays;
 

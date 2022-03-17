@@ -1,7 +1,6 @@
 package java.com.设计模式.装饰者模式;
 
-import com.设计模式.装饰者模式.Decorator;
-import com.设计模式.装饰者模式.Drink;
+
 
 /**
  * @Author: xs

@@ -1,5 +1,6 @@
 package java.com.设计模式.代理模式.Cglib;
 
+
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

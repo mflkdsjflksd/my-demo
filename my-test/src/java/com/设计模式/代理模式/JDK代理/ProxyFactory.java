@@ -1,6 +1,5 @@
 package java.com.设计模式.代理模式.JDK代理;
 
-import com.设计模式.代理模式.JDK代理.ProxyHandler;
 
 import java.lang.reflect.Proxy;
 
