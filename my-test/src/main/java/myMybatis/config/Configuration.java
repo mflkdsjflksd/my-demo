@@ -1,7 +1,7 @@
 package myMybatis.config;
 
 
-import myCollection.myHashMap.MyHashMap;
+import myMap.myHashMap.MyHashMap;
 import myMybatis.MappedStatement;
 
 public class Configuration {
