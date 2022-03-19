@@ -1,9 +1,8 @@
 package myMap.mySet;
 
+import myMap.MyMap;
 
-import myMap.MyCollection;
-
-public interface MySet<T> extends MyCollection {
+public interface MySet<T> extends MyMap {
 
     /**
      * @Author: xs

@@ -1,8 +1,7 @@
 package myMap.myHashMap;
 
-import myMap.MyCollection;
 
-public interface MyMap<K, V> extends MyCollection {
+public interface MyMap<K, V> extends myMap.MyMap {
     /**
      * 定义put方法
      *
