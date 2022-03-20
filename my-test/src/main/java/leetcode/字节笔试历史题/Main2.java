@@ -1,4 +1,4 @@
-package leetcode.字节笔试20220320;
+package leetcode.字节笔试历史题;
 
 import java.util.Scanner;
 
@@ -27,6 +27,7 @@ public class Main2 {
                 dp[i] = Math.min(dp[i - 1], dp[i]);
             }
         }
+
         int sum = 0;
         for (int i : dp) {
             sum += i;

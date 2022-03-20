@@ -1,4 +1,4 @@
-package leetcode.字节笔试20220320;
+package leetcode.字节笔试历史题;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class Main4 {
     static HashMap<Character, Character> dic = new HashMap<>();
+
     static char[] res;
 
     public static void init() {
