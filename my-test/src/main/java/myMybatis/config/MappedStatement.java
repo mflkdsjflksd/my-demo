@@ -1,4 +1,4 @@
-package myMybatis;
+package myMybatis.config;
 
 public class MappedStatement {
     private String namespace;

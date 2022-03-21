@@ -11,17 +11,16 @@
           and username = #{username}
     </select>
 
-    <!-- 测试循环依赖问题-->
     <resultMap id="selectByIdTest" type="com.entity.User" autoMapping="false">
         <id property="id" column="id"></id>
         <result property="username" column="username"></result>
         <result property="age" column="age"></result>
-        <association property="bookTest" column="id" select="com.mapper.BookMapper.selectBookById">
+        <association property="bookTest" column="id" select="com.mapper.BookMapper.selectBookById" fetchType="lazy">
             <id property="id" column="id"></id>
             <result property="bookName" column="book_name"></result>
         </association>
     </resultMap>
-    <select id="selectByIdTest" resultType="com.entity.User">
+    <select id="selectByIdTest" resultMap="selectByIdTest">
         select *
         from user
         where id = #{id};

@@ -1,6 +1,7 @@
 package myMybatis;
 
 import myMybatis.dao.UserMapper;
+import myMybatis.enumType.ExecutorType;
 import myMybatis.session.SqlSession;
 import myMybatis.session.SqlSessionFactory;
 
@@ -11,7 +12,7 @@ import myMybatis.session.SqlSessionFactory;
  */
 public class Main {
     public static void main(String[] args) {
-        SqlSession sqlSession = SqlSessionFactory.getSqlSession();
+        SqlSession sqlSession = SqlSessionFactory.getSqlSession(ExecutorType.DEFAULT);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         /*List<User> user = userMapper.selectAllByAge(2);
         //测试方法
@@ -25,7 +26,7 @@ public class Main {
         int i = userMapper.deleteUserById(1);
         System.out.println(i);
         int a = userMapper.insertUser("大帅比", 1);*/
-        userMapper.updateUserById("xushan", 1, 1);
+        System.out.println(userMapper.updateUserById("xushan", 1, 1));
     }
 }
 

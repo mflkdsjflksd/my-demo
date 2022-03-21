@@ -14,11 +14,12 @@ import java.util.List;
  * @since 2022/1/20
  */
 public class DefaultSqlSession implements SqlSession {
+
     private final Configuration conf;
     private final Executor executor;
 
-    public DefaultSqlSession(Configuration conf) {
-        this.conf = conf;
+    public DefaultSqlSession() {
+        this.conf = Configuration.CONFIGURATION;
         executor = new DefaultExecutor(conf);
     }
 

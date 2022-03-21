@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface UserMapper {
 
+    List<User> selectByIdTest(@Param("id") Integer id);
+
     User selectById(@Param("id") Integer id, @Param("age") Integer age, @Param("username") String username);
 
     User selectByIdSqlTest(@Param("id") Integer id, @Param("age") Integer age, @Param("username") String username, @Param("list") List list);

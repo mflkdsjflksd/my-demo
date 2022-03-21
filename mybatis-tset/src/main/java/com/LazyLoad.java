@@ -1,6 +1,8 @@
 package com;
 
 import com.entity.BookTest;
+import com.entity.User;
+import com.mapper.UserMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -40,22 +42,13 @@ public class LazyLoad {
     /**
      * @Author: xs
      * @Date: 2022/3/8 0:39
-     * @describe: 懒加载测试，BookMapper。xml文件配置association  fetchType="lazy"
+     * @describe: 懒加载测试
      */
     @Test
     public void test1() {
-        List<BookTest> bookTest = session.selectList("com.mapper.BookMapper.selectBookById", 1);
-        System.out.println(bookTest.toString());
+        UserMapper mapper = session.getMapper(UserMapper.class);
+        List<User> users = mapper.selectByIdTest(1);
+        System.out.println(users);
     }
 
-    /**
-     * @Author: xs
-     * @Date: 2022/3/8 0:39
-     * @describe: 结果集测试
-     */
-    @Test
-    public void test2() {
-        List<BookTest> bookTest = session.selectList("com.mapper.BookMapper.selectBookById", 1);
-        System.out.println(bookTest.toString());
-    }
 }

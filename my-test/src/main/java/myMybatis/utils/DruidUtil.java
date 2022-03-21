@@ -23,7 +23,7 @@ public class DruidUtil {
     static {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("src/com/myMybatis/db.properties"));
+            properties.load(new FileInputStream("E:\\project\\my-demo-master\\my-test\\src\\main\\java\\myMybatis\\resources\\db.properties"));
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();

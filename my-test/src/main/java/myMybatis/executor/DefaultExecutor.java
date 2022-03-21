@@ -1,6 +1,6 @@
 package myMybatis.executor;
 
-import myMybatis.MappedStatement;
+import myMybatis.config.MappedStatement;
 import myMybatis.config.Configuration;
 import myMybatis.utils.DruidUtil;
 import myMybatis.utils.ResultUtil;

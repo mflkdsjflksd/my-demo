@@ -130,6 +130,9 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      */
     @Override
     public V get(K k) {
+        if (mapLength == 0) {
+            return null;
+        }
         int index = getIndex(k);
         Entry<K, V> kvEntry = mapTable[index];
         return findValueByKey(k, kvEntry);

@@ -2,7 +2,7 @@ package myMybatis.executor;
 
 
 
-import myMybatis.MappedStatement;
+import myMybatis.config.MappedStatement;
 import java.util.List;
 
 /**
