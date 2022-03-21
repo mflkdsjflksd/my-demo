@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2022/3/21 16:49
  */
 public class LoadXML {
-    public static final String RESOURCE = "myMybatis.resources.mappers";
+    public static final String RESOURCE = "E:\\project\\my-demo-master\\my-test\\src\\main\\java\\myMybatis\\resources\\mappers";
 
     public LoadXML() {
         loadMappersInfo();

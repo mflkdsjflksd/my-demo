@@ -6,11 +6,12 @@ package myMybatis.enumType;
  * @describe: 执行器类型
  */
 public enum ExecutorType {
-    DEFAULT("default");
+    DEFAULT_EXECUTOR("default"), BATCH_EXECUTOR("batchExecutor");
 
     private final String type;
 
-    private ExecutorType(String type) {
+
+    ExecutorType(String type) {
         this.type = type;
     }
 

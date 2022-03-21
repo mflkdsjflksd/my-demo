@@ -1,7 +1,6 @@
 package myMybatis.executor;
 
 import myMybatis.config.MappedStatement;
-import myMybatis.config.Configuration;
 import myMybatis.utils.DruidUtil;
 import myMybatis.utils.ResultUtil;
 
@@ -18,11 +17,6 @@ import java.util.List;
  * @date 2022/1/20 15:19
  */
 public class DefaultExecutor implements Executor {
-    private Configuration conf;
-
-    public DefaultExecutor(Configuration conf) {
-        this.conf = conf;
-    }
 
     @Override
     public <E> List<E> query(MappedStatement ms, Object parameter) {

@@ -16,4 +16,5 @@ public enum Configuration {
     public void setMappedStatements(MyHashMap<String, MappedStatement> mappedStatements) {
         this.mappedStatements = mappedStatements;
     }
+
 }

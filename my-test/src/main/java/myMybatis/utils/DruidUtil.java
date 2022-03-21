@@ -1,7 +1,6 @@
 package myMybatis.utils;
 
 
-
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 
 import javax.sql.DataSource;
@@ -10,7 +9,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @Author: xs
@@ -27,6 +28,18 @@ public class DruidUtil {
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void close(Connection con, Statement statement) {
+        if (con != null && statement != null) {
+            try {
+                statement.close();
+                //归还连接
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

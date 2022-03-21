@@ -20,7 +20,7 @@ public class DefaultSqlSession implements SqlSession {
 
     public DefaultSqlSession() {
         this.conf = Configuration.CONFIGURATION;
-        executor = new DefaultExecutor(conf);
+        executor = new DefaultExecutor();
     }
 
     @Override
