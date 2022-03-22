@@ -1,8 +1,8 @@
 package myMybatis.session;
 
 import myMybatis.config.Configuration;
-import myMybatis.executor.DefaultExecutor;
 import myMybatis.executor.Executor;
+import myMybatis.executor.ExecutorFactory;
 import myMybatis.proxy.MapperProxy;
 
 import java.lang.reflect.Proxy;
@@ -18,13 +18,13 @@ public class DefaultSqlSession implements SqlSession {
     private final Configuration conf;
     private final Executor executor;
 
-    public DefaultSqlSession() {
+    public DefaultSqlSession(String type) {
         this.conf = Configuration.CONFIGURATION;
-        executor = new DefaultExecutor();
+        executor = ExecutorFactory.getExecutor(type);
     }
 
     @Override
-    public <T> T selectOne(String statement, Object parameter) {
+    public <T> T selectOne(String statement, Object[] parameter) {
         List<Object> selectList = selectList(statement, parameter);
         if (selectList.size() == 1) {
             return (T) selectList.get(0);
@@ -36,12 +36,12 @@ public class DefaultSqlSession implements SqlSession {
     }
 
     @Override
-    public <E> List<E> selectList(String statement, Object parameter) {
+    public <E> List<E> selectList(String statement, Object[] parameter) {
         return executor.query(conf.getMappedStatements().get(statement), parameter);
     }
 
     @Override
-    public int updateOne(String statement, Object args) {
+    public int update(String statement, Object[] args) {
         return executor.update(conf.getMappedStatements().get(statement), args);
     }
 

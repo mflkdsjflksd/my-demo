@@ -244,6 +244,23 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         return Math.abs((h ^ (h >>> 16)) % this.mapLength);
     }
 
+    @Override
+    public String toString() {
+        if (mapLength == 0) {
+            System.out.println(super.toString());
+        }
+        StringBuilder toStringBuilder = new StringBuilder();
+        toStringBuilder.append("[");
+        for (int i = 0; i < mapTable.length; i++) {
+            Entry temp = mapTable[i];
+            while (temp != null) {
+                toStringBuilder.append(" " + temp.getKey().toString() + temp.getValue().toString());
+                temp = temp.next;
+            }
+        }
+        return toStringBuilder.toString();
+    }
+
     /**
      * @Author: xs
      * @Date: 2022/2/15 11:46

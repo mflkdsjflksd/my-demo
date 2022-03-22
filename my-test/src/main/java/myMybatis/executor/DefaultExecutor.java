@@ -19,7 +19,7 @@ import java.util.List;
 public class DefaultExecutor implements Executor {
 
     @Override
-    public <E> List<E> query(MappedStatement ms, Object parameter) {
+    public <E> List<E> query(MappedStatement ms, Object[] parameter) {
         List<E> ret = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -28,7 +28,8 @@ public class DefaultExecutor implements Executor {
             //获取连接
             connection = DruidUtil.getConnection();
             preparedStatement = connection.prepareStatement(ms.getSql());
-            ResultUtil.parameterize(preparedStatement, parameter);
+
+            ResultUtil.parameterize(ms, preparedStatement, parameter);
             //请求数据库
             resultSet = preparedStatement.executeQuery();
             //处理结果集
@@ -42,7 +43,7 @@ public class DefaultExecutor implements Executor {
     }
 
     @Override
-    public int update(MappedStatement ms, Object parameter) {
+    public int update(MappedStatement ms, Object[] parameter) {
         int res = 0;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -50,8 +51,10 @@ public class DefaultExecutor implements Executor {
         try {
             //获取连接
             connection = DruidUtil.getConnection();
+            //处理参数
             preparedStatement = connection.prepareStatement(ms.getSql());
-            ResultUtil.parameterize(preparedStatement, parameter);
+            //处理传进来的参数
+            ResultUtil.parameterize(ms, preparedStatement, parameter);
             //请求数据库,并返回结果
             res = preparedStatement.executeUpdate();
         } catch (SQLException throwables) {

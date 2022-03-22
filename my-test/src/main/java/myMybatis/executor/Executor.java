@@ -15,7 +15,7 @@ public interface Executor {
      * @Date: 2022/1/20 15:21
      * @describe:
      */
-    <E> List<E> query(MappedStatement ms, Object parameter);
+    <E> List<E> query(MappedStatement ms, Object[] parameter);
 
-    int update(MappedStatement ms, Object parameter);
+    int update(MappedStatement ms, Object[] parameter);
 }

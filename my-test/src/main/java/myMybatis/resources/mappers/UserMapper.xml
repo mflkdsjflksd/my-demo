@@ -2,22 +2,32 @@
 
 <mapper namespace="myMybatis.dao.UserMapper">
     <select id="selectOneUser" resultType="myMybatis.entity.User">
-        select * from user where username = ?
+        select * from user where username = #{username}
     </select>
+
     <select id="selectOneUserByUsernameAndAge" resultType="myMybatis.entity.User">
-        select * from user where username = ? and age = ?
+        select * from user where username = #{username} and age = #{age}
     </select>
+
     <select id="selectAllByAge" resultType="myMybatis.entity.User">
-        select * from user where age = ?
+        select * from user where age = #{age}
     </select>
+
     <update id="updateUserById" resultType="java.lang.Integer">
-        update user set username = ? , age= ? where id = ?
+        update user set username = #{username} , age= #{age} where id = #{id}
     </update>
+
     <insert id="insertUser" resultType="java.lang.Integer">
-        insert into user values(null,?,?)
+        insert into user values(null,#{username},#{age})
     </insert>
+
     <delete id="deleteUserById" resultType="java.lang.Integer">
-        delete from user where id = ?
+        delete from user where id = #{id}
     </delete>
+
+    <insert id="batchInsertUser" resultType="java.lang.Integer">
+        insert into user values(null,#{username},#{age})
+    </insert>
+
 </mapper>
 

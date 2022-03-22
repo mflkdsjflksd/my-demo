@@ -10,7 +10,6 @@ public enum ExecutorType {
 
     private final String type;
 
-
     ExecutorType(String type) {
         this.type = type;
     }

@@ -11,7 +11,6 @@
           and username = #{username}
     </select>
 
-    <!-- 测试循环依赖问题-->
     <resultMap id="selectByIdTest" type="com.entity.User" autoMapping="false">
         <id property="id" column="id"></id>
         <result property="username" column="username"></result>

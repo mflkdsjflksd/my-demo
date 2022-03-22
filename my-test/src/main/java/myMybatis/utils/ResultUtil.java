@@ -1,5 +1,8 @@
 package myMybatis.utils;
 
+import myMybatis.config.Configuration;
+import myMybatis.config.MappedStatement;
+
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +15,7 @@ import java.util.List;
  * @date 2022/1/21 14:16
  */
 public class ResultUtil {
+
     /**
      * @Author: xs
      * @Date: 2022/1/20 21:15
@@ -64,18 +68,17 @@ public class ResultUtil {
 
     }
 
-    public static void parameterize(PreparedStatement preparedStatement, Object parameter) throws SQLException {
-        Object[] ob = (Object[]) parameter;
-        for (int i = 0; i < ob.length; i++) {
-            if (ob[i] instanceof Integer) {
-                preparedStatement.setInt(i + 1, (int) ob[i]);
-            } else if (ob[i] instanceof Long) {
-                preparedStatement.setLong(i + 1, (long) ob[i]);
-            } else if (ob[i] instanceof String) {
-                preparedStatement.setString(i + 1, (String) ob[i]);
+    public static void parameterize(MappedStatement ms, PreparedStatement preparedStatement, Object[] parameter) throws SQLException {
+        for (int i = 0; i < parameter.length; i++) {
+            if (parameter[i] instanceof Integer) {
+                preparedStatement.setInt(i + 1, (int) parameter[i]);
+            } else if (parameter[i] instanceof Long) {
+                preparedStatement.setLong(i + 1, (long) parameter[i]);
+            } else if (parameter[i] instanceof String) {
+                preparedStatement.setString(i + 1, (String) parameter[i]);
+            } else if (parameter[i] instanceof List) {
+                return;
             }
         }
-
-
     }
 }

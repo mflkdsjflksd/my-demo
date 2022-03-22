@@ -14,7 +14,7 @@ public interface SqlSession {
      * @author: xs
      * @return: 指定结果对象
      */
-    <T> T selectOne(String statement, Object parameter);
+    <T> T selectOne(String statement, Object[] parameter);
 
     /**
      * 根据传入条件查询多个结果
@@ -22,7 +22,7 @@ public interface SqlSession {
      * @Author: xs
      * @Return: 指定结果集集合
      */
-    <E> List<E> selectList(String statement, Object parameter);
+    <E> List<E> selectList(String statement, Object[] parameter);
 
     /**
      * @Author: xs
@@ -35,5 +35,5 @@ public interface SqlSession {
      * @Date: 2022/1/21 22:35
      * @describe: 更新删除插入通用
      */
-    int  updateOne(String s, Object args);
+    int  update(String s, Object[] args);
 }

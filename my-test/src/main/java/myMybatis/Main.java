@@ -4,6 +4,8 @@ import myMybatis.dao.UserMapper;
 import myMybatis.enumType.ExecutorType;
 import myMybatis.session.SqlSession;
 import myMybatis.session.SqlSessionFactory;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * @author: xs
@@ -11,25 +13,62 @@ import myMybatis.session.SqlSessionFactory;
  * @since 2022/1/20
  */
 public class Main {
+    SqlSession sqlSession;
+    UserMapper userMapper;
+
     public static void main(String[] args) {
-        SqlSession sqlSession = SqlSessionFactory.getSqlSession(ExecutorType.DEFAULT_EXECUTOR);
+
+/*        SqlSession sqlSession = SqlSessionFactory.getSqlSession(ExecutorType.DEFAULT_EXECUTOR);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-
-        //测试插入一百万条数据量耗时
-
-        /*List<User> user = userMapper.selectAllByAge(2);
-        //测试方法
-        User xs = userMapper.selectOneUser("xushan1");
-        for (User user1 : user) {
-            System.out.println(user1.toString());
+        //测试插入count条数据量耗时
+        long start = System.currentTimeMillis();
+        int count = 100000;
+        for (int i = 0; i < 100000; i++) {
+            userMapper.insertUser(String.valueOf(i), i);
         }
-        System.out.println(xs.toString());
-        User xs1 = userMapper.selectOneUserByUsernameAndAge("xushan1", 1);
-        System.out.println(xs1.toString());
-        int i = userMapper.deleteUserById(1);
-        System.out.println(i);
-        int a = userMapper.insertUser("大帅比", 1);*/
-        System.out.println(userMapper.updateUserById("xushan", 2, 1));
+        long end = System.currentTimeMillis();
+        //结果129391
+        System.out.println("测试插入" + count + "条数据耗时：" + (end -start ));
+
+        //测试删除count条数据耗时
+        start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            userMapper.deleteUserById(i);
+        }
+        end = System.currentTimeMillis();
+        //结果129391
+        System.out.println("测试插入" + count + "条数据耗时：" + (end -start ));*/
+        /**
+         * @describe: 使用批处理器插入一百万条数据
+         */
+//        SqlSession sqlSession = SqlSessionFactory.getSqlSession(ExecutorType.BATCH_EXECUTOR);
+//        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//        //测试插入count条数据量耗时
+//        long start = System.currentTimeMillis();
+//        int count = 1000000;
+//        List<User> users = new ArrayList<>();
+//        for (int i = 0; i < count; i++) {
+//            users.add(new User(String.valueOf(i), i));
+//        }
+//        userMapper.batchInsertUser(users);
+//        long end = System.currentTimeMillis();
+//        //结果1744
+//        System.out.println("测试插入" + count + "条数据耗时：" + (end - start));
+    }
+
+    @Before
+    public void init() {
+        sqlSession = SqlSessionFactory.getSqlSession(ExecutorType.DEFAULT_EXECUTOR);
+        userMapper = sqlSession.getMapper(UserMapper.class);
+    }
+
+    @Test
+    public void test() {
+        userMapper.insertUser("1", 1);
+    }
+    @Test
+    public void test2() {
+        userMapper.insertUser("1", 1);
     }
 }
 

@@ -1,6 +1,6 @@
 package myMybatis.config;
 
-import myMap.myHashMap.MyHashMap;
+import java.util.HashMap;
 
 /**
  * @Author: xs
@@ -9,12 +9,16 @@ import myMap.myHashMap.MyHashMap;
  */
 public class ConfigurationBuilder {
 
-    MyHashMap<String, MappedStatement> mappedStatements = new MyHashMap<>();
+    HashMap<String, MappedStatement> mappedStatements = new HashMap<>();
+
 
     public Configuration build() {
         Configuration configuration = Configuration.CONFIGURATION;
         configuration.setMappedStatements(mappedStatements);
+        //①处理xml文件②替换xml静态语句中的#{}替换为？，并记录里面的变量名字
         new LoadXML();
+        new DaoParamsBuilder().daoParamsBuilder();
+
         return configuration;
     }
 

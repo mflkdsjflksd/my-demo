@@ -31,7 +31,7 @@ public class MapperProxy implements InvocationHandler {
         if (Collection.class.isAssignableFrom(returnType)) {
             return session.selectList(method.getDeclaringClass().getName() + "." + method.getName(), args);
         } else if (int.class.isAssignableFrom(returnType)) {
-            return session.updateOne(method.getDeclaringClass().getName() + "." + method.getName(), args);
+            return session.update(method.getDeclaringClass().getName() + "." + method.getName(), args);
         } else {
             return session.selectOne(method.getDeclaringClass().getName() + "." + method.getName(), args);
         }
