@@ -64,7 +64,11 @@ public class Main {
 
     @Test
     public void test() {
-        userMapper.insertUser("1", 1);
+        try {
+            userMapper.insertUser("1", 1);
+        } catch (Exception e) {
+            throw new RuntimeException()
+        }
     }
     @Test
     public void test2() {
