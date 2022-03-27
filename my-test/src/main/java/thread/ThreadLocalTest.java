@@ -1,6 +1,6 @@
 package thread;
 
-import leetcode.TreeNode;
+import leetcode.数据结构.TreeNode;
 
 /**
  * @Author: xs

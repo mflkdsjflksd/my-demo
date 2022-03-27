@@ -1,6 +1,6 @@
 package leetcode.剑指;
 
-import leetcode.TreeNode;
+import leetcode.数据结构.TreeNode;
 
 import java.util.Arrays;
 

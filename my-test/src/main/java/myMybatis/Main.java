@@ -67,7 +67,7 @@ public class Main {
         try {
             userMapper.insertUser("1", 1);
         } catch (Exception e) {
-            throw new RuntimeException()
+            throw new RuntimeException();
         }
     }
     @Test
